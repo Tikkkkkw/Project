@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM 2.5 Levels Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px auto;
+            display: block;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">PM 2.5 Levels Over the Years</h1>
+    <canvas id="pm25Chart1"></canvas>
+    <canvas id="pm25Chart2"></canvas>
+    <canvas id="pm25Chart3"></canvas>
+    <canvas id="pm25Chart4"></canvas>
+
+    <script>
+        const datasets = [
+            {
+                labels: ["Annual Average 2009", "Annual Average 2010", "Annual Average 2011", "Annual Average 2012", "Annual Average 2013", "Annual Average 2014", "Annual Average 2015", "Annual Average 2016", "Annual Average 2017", "Annual Average 2018", "Annual Average 2019", "Annual Average 2020", "Annual Average 2021", "Annual Average 2022"],
+                dataValues: [9.9, 9.2, 9.8, 8.6, 8.2, 8.6, 8.1, 7.1, 7.1, 6.7, 6.2, 5.9, 6.4, 5.6]
+            },
+            {
+                labels: ["Annual Average 2009", "Annual Average 2010", "Annual Average 2011", "Annual Average 2012", "Annual Average 2013", "Annual Average 2014", "Annual Average 2015", "Annual Average 2016", "Annual Average 2017", "Annual Average 2018", "Annual Average 2019", "Annual Average 2020", "Annual Average 2021", "Annual Average 2022"],
+                dataValues: [10.5, 9.7, 9.3, 8.9, 8.4, 8.3, 7.9, 7.4, 7.2, 6.9, 6.5, 6.1, 6.7, 5.8]
+            },
+            {
+                labels: ["Annual Average 2009", "Annual Average 2010", "Annual Average 2011", "Annual Average 2012", "Annual Average 2013", "Annual Average 2014", "Annual Average 2015", "Annual Average 2016", "Annual Average 2017", "Annual Average 2018", "Annual Average 2019", "Annual Average 2020", "Annual Average 2021", "Annual Average 2022"],
+                dataValues: [8.8, 9.1, 9.2, 8.3, 7.9, 8.2, 7.8, 7.3, 6.9, 6.6, 6.1, 5.8, 6.5, 5.7]
+            },
+            {
+                labels: ["Annual Average 2009", "Annual Average 2010", "Annual Average 2011", "Annual Average 2012", "Annual Average 2013", "Annual Average 2014", "Annual Average 2015", "Annual Average 2016", "Annual Average 2017", "Annual Average 2018", "Annual Average 2019", "Annual Average 2020", "Annual Average 2021", "Annual Average 2022"],
+                dataValues: [9.3, 8.9, 9.0, 8.7, 8.1, 8.4, 8.0, 7.5, 7.0, 6.8, 6.4, 5.9, 6.6, 5.9]
+            }
+        ];
+
+        datasets.forEach((dataset, index) => {
+            const ctx = document.getElementById(`pm25Chart${index + 1}`).getContext('2d');
+
+            const data = {
+                labels: dataset.labels,
+                datasets: [{
+                    label: 'PM 2.5 Levels (mcg/m3)',
+                    data: dataset.dataValues,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time Period'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'PM 2.5 Level (mcg/m3)'
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+</body>
+</html>
