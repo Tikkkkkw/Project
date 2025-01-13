@@ -85,5 +85,6 @@
             new Chart(ctx, config);
         });
     </script>
+<a href="index.html">The main page</a> 
 </body>
 </html>
